@@ -43,20 +43,14 @@ A quick look at the [Plan9 manpages](http://plan9.bell-labs.com/sys/man/2/INDEX.
     ```
 Pretty straightforward and nothing that's impossible to figure out even though comments are absent. Likewise, `void exits(char *msg)` terminates the process.
 * __Does it conform to your agreed coding conventions? These will usually cover location of braces, variable and function names, line length, indentations, formatting, and comments.__
-Please note that the [docs](http://plan9.bell-labs.com/magic/man2html/2/exits) advise passing a useful message to `exits` which provides an 'explanation of the reason for exiting'. A null pointer or an empty string is also acceptable. Passing a `0` is perhaps a carryover from `exit(0);` which is fairly idiomatic in UN*X but perhaps not in Plan9. Likelly `0` is equivalent to `NULL` and the program will terminate correctly, but from the standpoint of coding conventions and custom it should be avoided if we are to be nitpicky.
+Please note that the [docs](http://plan9.bell-labs.com/magic/man2html/2/exits) advise passing a useful message to `exits` which provides an 'explanation of the reason for exiting'. A null pointer or an empty string is also acceptable. Passing a `0` is perhaps a carryover from `exit(0);` which is fairly idiomatic in UN*X but perhaps not in Plan9. Likely `0` is equivalent to `NULL` and the program will terminate correctly, but from the standpoint of coding conventions and custom it should be avoided if we are to be nit-picky.
 
-<!-- * __Is there any redundant or duplicate code?__ -->
-<!-- * __Is the code as modular as possible?__ -->
-<!-- * __Can any global variables be replaced?__ -->
 * __Is there any commented out code?__
 Extensive use of commenting out code in `qio.c` with no clear justification provided. Was this code commented out as part of an ongoing investigation into the working of the OS? Is it simply no longer needed? This is generally a really bad practice, as it adds to the confusion of reading someone else's code. It also indicates that a version control system is not being used to its full potential.
-<!-- * __Do loops have a set length and correct termination conditions?__ -->
-<!-- * __Can any of the code be replaced with library functions?__ -->
-<!-- * __Can any logging or debugging code be removed?__ -->
 
 ### Security
 Since you are rewriting a part of the operating system it is important to decide how to avoiding adding regressions in terms of both the stability and the security of plan9.
-Watch out for buffer overflows, circumventing privileges and the like. You are working on the scheduler which will govern potentially malicious processes, so it wuold be important to consider if and how to guard against them (think about how it's ok for a process to spawn infinitely many children in Linux -- perhaps you want your scheduler to guard against such cases in order to, for example, improve the response time of a server being DDoS'ed)
+Watch out for buffer overflows, circumventing privileges and the like. You are working on the scheduler which will govern potentially malicious processes, so it would be important to consider if and how to guard against them (think about how it's ok for a process to spawn infinitely many children in Linux -- perhaps you want your scheduler to guard against such cases in order to, for example, improve the response time of a server being DDoS'ed)
 
 ### Documentation
 
@@ -65,7 +59,6 @@ There seem to be two different compile scripts in both `9\hello` and `9\three-in
 The name for `stuff.h` is not very approachable. It looks like the commented out parts are a rewrite of parts from `qio.c`. Why is that necessary? It is not clear what the exact role of `stuff.h` is. Even with a better name, a README here detailing your methodology and goals would have been very helpful.
 * __Are all functions commented?__
 Functions is `qio.c` are well documented, even though more meaningful in the grand context of things. Someone with little knowledge of the big picture in Plan9 would not be able to start contributing right away but this is OK as long as the README provides the necessary detail.
-<!-- * Is any unusual behavior or edge-case handling described?  * Is the use and function of third-party libraries documented? -->
 * __Are data structures and units of measurement explained?__
 The data structures are well documented.
 * __Is there any incomplete code? If so, should it be removed or flagged with a suitable marker like ‘TODO’?__
@@ -74,10 +67,8 @@ The repo contains a TODO list.
 ### Testing
 
 * __Is the code testable? i.e. don’t add too many or hide dependencies, unable to initialize objects, test frameworks can use methods etc.__
-It is hard to tell how you intend to test your code at this point, since you haven't gotten it to compile. Given the project it would be difficult to find suitbale test frameworks. Moreover, you're attempting to isolate a part of the OS to cut on compilation time, but can you also reliably test in isolation? You'd have to think about injecting your scheduler into a build of the OS and run it in a VM or on hardware.
-<!-- * Do tests exist and are they comprehensive? i.e. has at least your agreed on code coverage. -->
+It is hard to tell how you intend to test your code at this point, since you haven't gotten it to compile. Given the project it would be difficult to find suitable test frameworks. Moreover, you're attempting to isolate a part of the OS to cut on compilation time, but can you also reliably test in isolation? You'd have to think about injecting your scheduler into a build of the OS to run in a VM or on hardware.
 * __Do unit tests actually test that the code is performing the intended functionality?__
-Unit tests here would be useful but as mentioned you shuold consider running your component as part of a testing build.
+Unit tests here would be useful but as mentioned you should consider running your component as part of a testing build.
 * __Are arrays checked for ‘out-of-bound’ errors?__
 This would be extremely important as you develop your algorithm: such errors will easily compromise the stability and security of the OS.
-<!-- * Could any test code be replaced with the use of an existing API? -->
