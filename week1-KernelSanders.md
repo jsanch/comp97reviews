@@ -7,7 +7,7 @@
 
 We weren't able to compile the code as we do not have Plan9 at hand. All of the code in the repo is meant to run under Plan9 userspace, and the project itself is an attempt to rewrite parts of the OS. Thus we have no means to test and profile the code. Nevertheless, we were able to provide some general coding suggestions that would hopefully prevent maintainability and code quality problems down the road.
 
-While unavoidable when tinkering and figuring things out, not leaving a README and commenting out code should be avoided at all costs. It not only makes it harder to understand the code but it makes it harder to manage the project as it grows harder. We suggest that you follow a clear and documented strategy when working on your scheduler. This will help you too when trying to understand the complexity of how everything fits together (and that's no small task for this project) Documenting the steps you took will likely help you stay on track.
+While unavoidable when tinkering and figuring things out, not leaving a README and commenting out code should be avoided at all costs. It not only makes it harder to understand the code but it makes it harder to manage the project as it grows in complexity. We suggest that you follow a clear and documented strategy when working on your scheduler. This will help you too when trying to understand the complexity of how everything fits together (and that's no small task for this project) Documenting the steps you took will likely help you stay on track.
 
 Bellow we follow the Fog Creek Code Review Checklist.
 
