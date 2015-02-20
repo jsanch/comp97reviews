@@ -91,4 +91,4 @@ it and telling what needs to be done to complete it with a "TODO" marker.
 Given the scope, it was easy to test the progress that ToneVision has achieved.
 We simply loaded the file on a browser and tested using the console. Since
 all the dependecies are included , it was easy to start with the testing without
-any hassle. 
+any hassle.
